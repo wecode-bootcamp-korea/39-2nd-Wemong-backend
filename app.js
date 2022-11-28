@@ -7,6 +7,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { router } = require('./api/routes');
 const { appDataSource } = require('./api/models/data_source');
+const { globalErrorHandler } = require('./api/utils/error');
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use(router);
 app.get('/ping', (req, res) => {
     return res.status(200).json({ message: 'pong' });
 });
+
+app.use(globalErrorHandler);
 
 const server = http.createServer(app);
 const PORT = process.env.PORT;
