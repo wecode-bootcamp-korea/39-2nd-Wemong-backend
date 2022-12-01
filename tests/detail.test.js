@@ -62,6 +62,8 @@ describe('getLectureByLectureId', () => {
                         images: 'aimage',
                         lecturerName: '커피',
                         subCategory: 'koreanFood',
+                        reviews: null,
+                        rating: null
                     },
                 ],
             });
@@ -81,6 +83,8 @@ describe('getLectureByLectureId', () => {
                         images: 'bimage',
                         lecturerName: '캔디',
                         subCategory: 'chineseFood',
+                        reviews: null,
+                        rating: null
                     },
                 ],
             });
