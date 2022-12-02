@@ -1,3 +1,3 @@
 const userDao = require('./userDao');
-
-module.exports = { userDao };
+const lectureDao = require('./lectureDao');
+module.exports = { userDao, lectureDao };

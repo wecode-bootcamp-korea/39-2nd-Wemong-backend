@@ -1,3 +1,3 @@
 const authService = require('./authService');
-
-module.exports = { authService };
+const lectureService = require('./lectureService');
+module.exports = { authService, lectureService };
