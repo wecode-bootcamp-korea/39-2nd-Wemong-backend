@@ -1,7 +1,11 @@
-const { lectureDao } = require("../models");
+const { lectureDao } = require('../models');
 
 const getLectureByLectureId = async (lectureId) => {
     return await lectureDao.getLectureByLectureId(lectureId);
 };
 
-module.exports = { getLectureByLectureId };
+const getLectures = async (params) => {
+    return lectureDao.getLectures(params);
+};
+
+module.exports = { getLectures, getLectureByLectureId };

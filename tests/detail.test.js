@@ -1,21 +1,21 @@
-const request = require("supertest");
-const {createApp} = require('../app');
-const {appDataSource} = require("../api/models/data_source")
+const request = require('supertest');
+const { createApp } = require('../app');
+const { appDataSource } = require('../api/models/data_source');
 
-describe("getLectureByLectureId", () =>{
+describe('getLectureByLectureId', () => {
     let app;
-})
+});
 
-beforeAll(async() => {
-    app =createApp();
+beforeAll(async () => {
+    app = createApp();
     await appDataSource.initialize();
 });
 
-afterAll(async() => {
+afterAll(async () => {
     await appDataSource.destroy();
 });
 
-beforeEach(async()=>{
+beforeEach(async () => {
     await appDataSource.query(`SET FOREIGN_KEY_CHECKS = 0`);
     await appDataSource.query(`TRUNCATE lectures`);
     await appDataSource.query(`TRUNCATE users`);
@@ -28,7 +28,7 @@ beforeEach(async()=>{
         ("캔디", "candy@gmail.com", 22, 2),
         ("초코", "choko@gmail.com", 33, 1)
         `
-    )
+    );
 
     await appDataSource.query(
         `INSERT INTO lectures ( title, content, price, sub_category_id, user_id )
@@ -36,7 +36,7 @@ beforeEach(async()=>{
         ("강의제목2", "강의내용2", "20000", 2, 2),
         ("강의제목3", "강의내용3", "15000",4, 1)
         `
-    )
+    );
 
     await appDataSource.query(
         `INSERT INTO lecture_images( image_url, lecture_id)
@@ -44,37 +44,43 @@ beforeEach(async()=>{
         ("bimage", 2),
         ("cimage", 3)
         `
-    )
+    );
 });
 
-test("SUCEESS: get lectureId", async () => {
+test('SUCEESS: get lectureId', async () => {
     await request(app)
-    .get("/lectures/1")
-    .expect(200)
-    .expect({
-        "data": [{
-            "id": 1,
-            "lectureTitle": "강의제목1",
-            "lectureText": "강의내용1",
-            "price": "10000",
-            "images": "aimage",
-            "lecturerName": "커피",
-            "subCategory": "koreanFood"
-        }] })
-    });
+        .get('/lectures/1')
+        .expect(200)
+        .expect({
+            data: [
+                {
+                    id: 1,
+                    lectureTitle: '강의제목1',
+                    lectureText: '강의내용1',
+                    price: '10000',
+                    images: 'aimage',
+                    lecturerName: '커피',
+                    subCategory: 'koreanFood',
+                },
+            ],
+        });
+});
 
-    test("SUCEESS: get lectureId", async () => {
+test('SUCEESS: get lectureId', async () => {
     await request(app)
-    .get("/lectures/2")
-    .expect(200)
-    .expect({
-        "data": [{
-            "id": 2,
-            "lectureTitle": "강의제목2",
-            "lectureText": "강의내용2",
-            "price": "20000",
-            "images": "bimage",
-            "lecturerName": "캔디",
-            "subCategory": "chineseFood"
-        }] })
-    });
+        .get('/lectures/2')
+        .expect(200)
+        .expect({
+            data: [
+                {
+                    id: 2,
+                    lectureTitle: '강의제목2',
+                    lectureText: '강의내용2',
+                    price: '20000',
+                    images: 'bimage',
+                    lecturerName: '캔디',
+                    subCategory: 'chineseFood',
+                },
+            ],
+        });
+});
