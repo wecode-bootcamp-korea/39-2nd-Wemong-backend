@@ -1,6 +1,7 @@
 const { appDataSource } = require('./data_source');
+const { buildGetLecturesQuery } = require('./lectureQueryBuilder');
 
-const getLectureByLectureId  = async ( lectureId ) => {
+const getLectureByLectureId = async (lectureId) => {
     const detail = await appDataSource.query(
         `
 		SELECT
@@ -28,9 +29,14 @@ const getLectureByLectureId  = async ( lectureId ) => {
 		LEFT JOIN lecture_images li ON l.id = li.lecture_id
 		LEFT JOIN sub_categories subCate ON l.sub_category_id =subCate.id 
 		WHERE l.id =?
-        `,[lectureId]
+        `,
+        [lectureId]
     );
-    return detail
+    return detail;
 };
 
-module.exports = { getLectureByLectureId };
+const getLectures = async (params) => {
+    return await appDataSource.query(buildGetLecturesQuery(params));
+};
+
+module.exports = { getLectures, getLectureByLectureId };
