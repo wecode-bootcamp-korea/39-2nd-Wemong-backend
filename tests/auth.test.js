@@ -20,7 +20,10 @@ describe('logIn', () => {
     });
 
     afterAll(async () => {
-        await appDataSource.query(`DELETE FROM users;`);
+        await appDataSource.query(`set FOREIGN_KEY_CHECKS = 0`);
+        await appDataSource.query(`TRUNCATE TABLE users`);
+        await appDataSource.query(`set FOREIGN_KEY_CHECKS = 1`);
+
         await appDataSource.destroy();
     });
 
