@@ -1,7 +1,7 @@
 const { lectureService } = require('../services');
 const { catchAsync, CustomError } = require('../utils/error');
 
-const getLectureByLectureId = catchAsync(async (req, res) => {
+const getLectureByLectureId = catchAsync ( async (req, res) => {
     const lectureId = req.params.lectureId;
     if (!lectureId) throw new CustomError('BAD REQUEST', 400);
     const detail = await lectureService.getLectureByLectureId(lectureId);
@@ -14,4 +14,4 @@ const getLectures = catchAsync(async (req, res) => {
     return res.status(200).json({ lectures: lectures });
 });
 
-module.exports = { getLectures, getLectureByLectureId };
+module.exports = { getLectureByLectureId, getLectures };
