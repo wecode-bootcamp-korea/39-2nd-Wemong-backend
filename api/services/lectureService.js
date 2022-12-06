@@ -8,4 +8,4 @@ const getLectures = async (params) => {
     return lectureDao.getLectures(params);
 };
 
-module.exports = { getLectures, getLectureByLectureId };
+module.exports = { getLectureByLectureId, getLectures };
