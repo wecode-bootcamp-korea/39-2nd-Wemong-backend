@@ -1,8 +1,8 @@
 const { appDataSource } = require('./data_source');
 
-const getLectureTimeByLectureId = async( lectureId )=> {
-	const lectureTimeOption = await appDataSource.query(
-		`
+const getLectureTimeByLectureId = async (lectureId) => {
+    const lectureTimeOption = await appDataSource.query(
+        `
 		SELECT
 		l.id lectureId,
 		l.title lectureTitle,
@@ -14,7 +14,7 @@ const getLectureTimeByLectureId = async( lectureId )=> {
 		"lectureTimeOptionId",lto.id,
 		"isReserved", lto.is_reserved,
 		"lectureDate", DATE_FORMAT(
-			lecture_time, '%Y, %m, %e')
+			lecture_time, '%Y,%m,%e')
 		))
 		FROM lecture_time_options lto
 		WHERE lto.lecture_id = l.id
@@ -32,9 +32,10 @@ const getLectureTimeByLectureId = async( lectureId )=> {
 		) AS lecturerName
 	FROM lectures l
 	WHERE l.id = ?
-		`,[lectureId]
-	)
-	return lectureTimeOption
+		`,
+        [lectureId]
+    );
+    return lectureTimeOption;
 };
 
-module.exports = { getLectureTimeByLectureId}
+module.exports = { getLectureTimeByLectureId };
