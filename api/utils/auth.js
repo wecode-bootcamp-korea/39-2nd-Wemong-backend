@@ -10,10 +10,7 @@ const loginRequired = catchAsync(async (req, res, next) => {
 
     if (!token) throw new CustomError('NO_TOKEN', 401);
 
-    const decoded = await promisify(jwt.verify)(
-        token,
-        process.env.JWT_SECRET
-    ).catch(() => {
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET).catch(() => {
         throw new CustomError('TOKEN_ERROR', 401);
     });
 

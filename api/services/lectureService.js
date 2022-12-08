@@ -8,4 +8,7 @@ const getLectures = async (params) => {
     return lectureDao.getLectures(params);
 };
 
-module.exports = { getLectureByLectureId, getLectures };
+const getLectureTimeOptionsByLectureId = async (lectureId) => {
+    return await lectureDao.getLectureTimeOptionsByLectureId(lectureId);
+};
+module.exports = { getLectures, getLectureByLectureId, getLectureTimeOptionsByLectureId };
