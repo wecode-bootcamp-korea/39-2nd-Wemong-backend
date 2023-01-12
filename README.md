@@ -29,6 +29,7 @@
 - Notion
 - Trello 
 - Slack
+- github notes
 - github
 
 ## 📼 Demo Video
